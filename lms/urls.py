@@ -948,3 +948,17 @@ if settings.FEATURES.get('ENABLE_FINANCIAL_ASSISTANCE_FORM'):
             name='submit_financial_assistance_request'
         )
     )
+
+#=============== TMA =================
+# Course rating
+if settings.FEATURES.get('TMA_ENABLE_COURSE_RATING'):
+    urlpatterns += (
+        url(
+            r'^course_ratings_handler/{}/$'.format(
+                settings.COURSE_ID_PATTERN
+            ),
+            'course_rating.views.course_ratings_handler',
+            name='course_ratings_handler'
+        ),
+    )
+#================TMA =================

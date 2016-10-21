@@ -1,4 +1,4 @@
-<article class="course" role="region" aria-label="<%- content.display_name %>">
+<article class="course" id="<%- course %>" role="region" aria-label="<%- content.display_name %>">
     <a href="/courses/<%- course %>/about">
         <header class="course-image">
             <div class="cover-image">
@@ -11,6 +11,7 @@
                 <span class="course-organization"><%- org %></span>
                 <span class="course-code"><%- content.number %></span>
                 <span class="course-title"><%- content.display_name %></span>
+                <span class="course-ratings course-card-ratings"></span>
             </h2>
             <div class="course-date" aria-hidden="true">
                 <%- interpolate(

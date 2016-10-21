@@ -2134,6 +2134,10 @@ INSTALLED_APPS = (
 
     # additional release utilities to ease automation
     'release_util',
+
+    # TMA APPS
+    'course_rating',
+
 )
 
 # Migrations which are not in the standard module "migrations"
