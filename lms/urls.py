@@ -961,4 +961,16 @@ if settings.FEATURES.get('TMA_ENABLE_COURSE_RATING'):
             name='course_ratings_handler'
         ),
     )
+
+# Course completion progress
+if settings.FEATURES.get('TMA_ENABLE_COMPLETION_TRACKING'):
+    urlpatterns += (    
+        url(
+            r'^courses/{}/completion_progress/'.format(
+                settings.COURSE_ID_PATTERN,
+            ),
+            include('course_progress.urls')
+        ),
+    )
+
 #================TMA =================

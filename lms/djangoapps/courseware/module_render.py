@@ -81,6 +81,10 @@ from xmodule.modulestore.exceptions import ItemNotFoundError
 from xmodule.x_module import XModuleDescriptor
 from .field_overrides import OverrideFieldData
 
+# TMA course completion progress
+from course_progress.progress import update_course_progress
+from course_progress.helpers import item_affects_course_progress
+
 log = logging.getLogger(__name__)
 
 
@@ -1042,6 +1046,11 @@ def _invoke_xblock_handler(request, course_id, usage_id, handler, suffix, course
 
     with modulestore().bulk_operations(course_key):
         instance, tracking_context = get_module_by_usage_id(request, course_id, usage_id, course=course)
+
+        # For course completion tracking
+        affects = item_affects_course_progress(request, course_key, suffix, handler, instance)
+        if settings.FEATURES.get('TMA_ENABLE_COMPLETION_TRACKING') and affects:
+            update_course_progress(request, course_key, instance.category, [instance.location])
 
         # Name the transaction so that we can view XBlock handlers separately in
         # New Relic. The suffix is necessary for XModule handlers because the

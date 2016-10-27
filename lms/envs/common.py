@@ -2137,6 +2137,7 @@ INSTALLED_APPS = (
 
     # TMA APPS
     'course_rating',
+    'course_progress',
 
 )
 
