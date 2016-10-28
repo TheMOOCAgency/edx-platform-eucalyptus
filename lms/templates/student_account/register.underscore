@@ -62,6 +62,10 @@
 
     <%= context.fields %>
 
+    <% if (context.registration_captcha) { %>
+        <div class="g-recaptcha" data-sitekey="<%- context.captcha_site_key %>" ></div>
+    <% } %>
+
     <button type="submit" class="action action-primary action-update js-register register-button"><%- gettext("Create your account") %></button>
     <p class="note">* <%- gettext("Required field") %></p>
 </form>

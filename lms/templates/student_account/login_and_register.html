@@ -2,12 +2,26 @@
     import json
     from django.utils.translation import ugettext as _
     from openedx.core.djangolib.js_utils import dump_js_escaped_json
+    from django.conf import settings
 %>
 <%namespace name='static' file='/static_content.html'/>
 
 <%inherit file="../main.html" />
 
 <%block name="pagetitle">${_("Sign in or Register")}</%block>
+
+<%block name="head_extras">
+    % if settings.FEATURES.get('TMA_ENABLE_LOGIN_RECAPTCHA') or settings.FEATURES.get('TMA_ENABLE_REGISTRATION_RECAPTCHA'):
+      <script type="text/javascript">
+        //wait for document.ready to fire
+        $(function () {
+
+          //then load the JavaScript file
+          $.getScript('https://www.google.com/recaptcha/api.js?hl=${settings.LANGUAGE_CODE}');
+        });
+      </script>
+    % endif
+</%block>
 
 <%block name="js_extra">
     <%static:require_module module_name="js/student_account/logistration_factory" class_name="LogistrationFactory">
@@ -22,6 +36,24 @@
             newrelic.addPageAction('xfinished');
         }
     </%static:require_module>
+    <script type="text/javascript">
+        $(document).ajaxComplete(function(event, xhr, settings){
+            var is_login_ajax = false;
+            var is_register_ajax = false;
+
+            % if settings.FEATURES.get('TMA_ENABLE_LOGIN_RECAPTCHA'):
+                is_login_ajax = settings.url.endsWith('login_session/');
+            % endif
+
+            % if settings.FEATURES.get('TMA_ENABLE_REGISTRATION_RECAPTCHA'):
+                is_register_ajax = settings.url.endsWith('registration/');
+            % endif
+
+            if( is_login_ajax || is_register_ajax ) {
+              grecaptcha.reset();
+            }
+        });
+    </script>
 </%block>
 
 <%block name="header_extras">

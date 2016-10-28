@@ -3015,3 +3015,10 @@ REDIRECT_CACHE_KEY_PREFIX = 'redirects'
 ############## Settings for LMS Context Sensitive Help ##############
 
 DOC_LINK_BASE_URL = None
+
+############## Settings for TMA #####################################
+# Google reCaptcha
+RECAPTCHA_VERIFY_ENDPOINT = 'https://www.google.com/recaptcha/api/siteverify'
+RECAPTCHA_SITE_KEY = None
+RECAPTCHA_SECRETE_KEY = None
+############## //Settings for TMA ###################################

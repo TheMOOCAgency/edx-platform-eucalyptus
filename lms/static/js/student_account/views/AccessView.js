@@ -70,6 +70,11 @@
                     this.platformName = options.platform_name;
                     this.supportURL = options.support_link;
 
+                    // TMA FEATURES related to logistration
+                    this.login_captcha = options.login_captcha;
+                    this.registration_captcha = options.registration_captcha;
+                    this.captcha_site_key = options.captcha_site_key;
+
                 // The login view listens for 'sync' events from the reset model
                     this.resetModel = new PasswordResetModel({}, {
                         method: 'GET',
@@ -119,7 +124,9 @@
                             resetModel: this.resetModel,
                             thirdPartyAuth: this.thirdPartyAuth,
                             platformName: this.platformName,
-                            supportURL: this.supportURL
+                            supportURL: this.supportURL,
+                            login_captcha: this.login_captcha,
+                            captcha_site_key: this.captcha_site_key
                         });
 
                     // Listen for 'password-help' event to toggle sub-views
@@ -155,7 +162,9 @@
                             fields: data.fields,
                             model: model,
                             thirdPartyAuth: this.thirdPartyAuth,
-                            platformName: this.platformName
+                            platformName: this.platformName,
+                            registration_captcha: this.registration_captcha,
+                            captcha_site_key: this.captcha_site_key
                         });
 
                     // Listen for 'auth-complete' event so we can enroll/redirect the user appropriately.

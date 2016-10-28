@@ -30,6 +30,8 @@
                     this.platformName = data.platformName;
                     this.resetModel = data.resetModel;
                     this.supportURL = data.supportURL;
+                    this.login_captcha = data.login_captcha;
+                    this.captcha_site_key = data.captcha_site_key;
 
                     this.listenTo(this.model, 'sync', this.saveSuccess);
                     this.listenTo(this.resetModel, 'sync', this.resetEmail);
@@ -47,7 +49,9 @@
                             errorMessage: this.errorMessage,
                             providers: this.providers,
                             hasSecondaryProviders: this.hasSecondaryProviders,
-                            platformName: this.platformName
+                            platformName: this.platformName,
+                            login_captcha: this.login_captcha,
+                            captcha_site_key: this.captcha_site_key
                         }
                     }));
 

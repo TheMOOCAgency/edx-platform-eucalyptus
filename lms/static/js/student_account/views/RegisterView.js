@@ -29,6 +29,8 @@
                     this.errorMessage = data.thirdPartyAuth.errorMessage || '';
                     this.platformName = data.platformName;
                     this.autoSubmit = data.thirdPartyAuth.autoSubmitRegForm;
+                    this.registration_captcha = data.registration_captcha;
+                    this.captcha_site_key = data.captcha_site_key;
 
                     this.listenTo(this.model, 'sync', this.saveSuccess);
                 },
@@ -46,7 +48,9 @@
                             errorMessage: this.errorMessage,
                             providers: this.providers,
                             hasSecondaryProviders: this.hasSecondaryProviders,
-                            platformName: this.platformName
+                            platformName: this.platformName,
+                            registration_captcha: this.registration_captcha,
+                            captcha_site_key: this.captcha_site_key
                         }
                     }));
 

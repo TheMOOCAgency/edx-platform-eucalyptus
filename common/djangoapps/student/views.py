@@ -125,6 +125,7 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.djangoapps.theming import helpers as theming_helpers
 from openedx.core.djangoapps.user_api.preferences import api as preferences_api
 
+from recaptcha.views import verify_recaptcha
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -1201,6 +1202,13 @@ def login_user(request, error=""):  # pylint: disable=too-many-statements,unused
                 "value": _('There was an error receiving your login information. Please email us.'),
             })  # TODO: this should be status code 400
 
+        if settings.FEATURES.get('TMA_ENABLE_LOGIN_RECAPTCHA') and \
+        not verify_recaptcha(request):
+            return JsonResponse({
+                "success": False,
+                "value": _('Please prove you are not a robot.'),
+            })
+
         email = request.POST['email']
         password = request.POST['password']
         try:
@@ -1611,6 +1619,13 @@ def create_account_with_params(request, params):
     # Copy params so we can modify it; we can't just do dict(params) because if
     # params is request.POST, that results in a dict containing lists of values
     params = dict(params.items())
+
+    # Check for reCaptcha
+    if settings.FEATURES.get('TMA_ENABLE_REGISTRATION_RECAPTCHA') and \
+    not verify_recaptcha(request):
+        raise ValidationError({
+            'access_token': [_('Please prove you are not a robot.')]
+        })
 
     # allow to define custom set of required/optional/hidden fields via configuration
     extra_fields = configuration_helpers.get_value(
