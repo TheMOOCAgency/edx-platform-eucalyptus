@@ -190,6 +190,13 @@ COURSE_URLS = patterns(
         name='registration_code_details',
     ),
 )
+
+# TMA change course root if welcome page is enabled
+course_root_url = (
+    'courseware.views.views.course_info',
+    'course_welcome.views.course_welcome',
+)[int(settings.FEATURES.get('TMA_ENABLE_COURSE_WELCOME_PAGE', False))]
+
 urlpatterns += (
     # jump_to URLs for direct access to a location in the course
     url(
@@ -289,7 +296,7 @@ urlpatterns += (
         r'^courses/{}/$'.format(
             settings.COURSE_ID_PATTERN,
         ),
-        'courseware.views.views.course_info',
+        course_root_url,
         name='course_root',
     ),
     url(
@@ -973,4 +980,27 @@ if settings.FEATURES.get('TMA_ENABLE_COMPLETION_TRACKING'):
         ),
     )
 
+# course welcome page
+if settings.FEATURES.get('TMA_ENABLE_COURSE_WELCOME_PAGE'):
+    urlpatterns += (
+        url(
+            r'^courses/{}/welcome$'.format(
+                settings.COURSE_ID_PATTERN,
+            ),
+            'course_welcome.views.course_welcome',
+            name='welcome',
+        ),
+    )
+
+# Forum messages
+if settings.FEATURES.get('TMA_ENABLE_FORUM_MESSAGES_API'):
+    urlpatterns += (
+        url(
+            r'^forum_messages/{}/(?P<section_id>[^/]*)/$'.format(
+                settings.COURSE_ID_PATTERN
+            ),
+            APIForumMessages.as_view(),
+            name='api_forum_messages'
+        ),
+    )
 #================TMA =================

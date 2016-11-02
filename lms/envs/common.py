@@ -2138,6 +2138,7 @@ INSTALLED_APPS = (
     # TMA APPS
     'course_rating',
     'course_progress',
+    'course_welcome',
 
 )
 
@@ -3021,4 +3022,7 @@ DOC_LINK_BASE_URL = None
 RECAPTCHA_VERIFY_ENDPOINT = 'https://www.google.com/recaptcha/api/siteverify'
 RECAPTCHA_SITE_KEY = None
 RECAPTCHA_SECRETE_KEY = None
+
+# Course welcome page name
+TMA_WELCOME_PAGE_NAME = 'purple'
 ############## //Settings for TMA ###################################
