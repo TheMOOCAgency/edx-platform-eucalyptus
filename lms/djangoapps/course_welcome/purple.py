@@ -74,7 +74,7 @@ def prepare_chapters_with_grade(request, course):
                     'section_index': section_index,
                     'display_name': section.display_name,
                     'url_name': section.url_name,
-                    'passed': success_cutoff and percentage >= success_cutoff,
+                    'passed': (success_cutoff and percentage >= success_cutoff) or (total == 0),
                     'paused': active_section and (section.url_name == active_section.url_name)
                 })
             chapters.append({
