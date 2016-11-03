@@ -4,11 +4,9 @@ Course info helpers
 from __future__ import division
 
 from collections import OrderedDict
-from django.core.context_processors import csrf
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from edxmako.shortcuts import render_to_string
 from xmodule.modulestore.django import modulestore
 from openedx.core.lib.gating import api as gating_api
 from submissions import api as sub_api
@@ -24,13 +22,11 @@ from courseware.model_data import FieldDataCache, ScoresClient
 from courseware.entrance_exams import user_must_complete_entrance_exam
 from lms.djangoapps.grades.new.course_grade import CourseGradeFactory
 from lms.djangoapps.grades.scores import get_score, possibly_scored
-from lms.djangoapps.grades.models import BlockRecord, PersistentSubsectionGrade
 
 from openedx.core.djangoapps.content.block_structure.api import get_course_in_cache
 
 from util import milestones_helpers
 from util.db import outer_atomic
-from util.model_utils import slugify
 
 from forum_messages.views import get_section_list as get_discussions_participated
 from course_progress.models import StudentCourseProgress
