@@ -1207,13 +1207,6 @@ def login_user(request, error=""):  # pylint: disable=too-many-statements,unused
                 "value": _('There was an error receiving your login information. Please email us.'),
             })  # TODO: this should be status code 400
 
-        if settings.FEATURES.get('TMA_ENABLE_LOGIN_RECAPTCHA') and \
-        not verify_recaptcha(request):
-            return JsonResponse({
-                "success": False,
-                "value": _('Please prove you are not a robot.'),
-            })
-
         email = request.POST['email']
         password = request.POST['password']
         try:
@@ -1331,6 +1324,13 @@ def login_user(request, error=""):  # pylint: disable=too-many-statements,unused
 
     if user is not None and user.is_active:
         try:
+            if settings.FEATURES.get('TMA_ENABLE_LOGIN_RECAPTCHA') and \
+            not verify_recaptcha(request):
+                return JsonResponse({
+                    "success": False,
+                    "value": _('Please prove you are not a robot.'),
+                })
+
             # We do not log here, because we have a handler registered
             # to perform logging on successful logins.
             login(request, user)
@@ -1518,7 +1518,7 @@ def user_signup_handler(sender, **kwargs):  # pylint: disable=unused-argument
             log.info(u'user {} originated from a white labeled "Microsite"'.format(kwargs['instance'].id))
 
 
-def _do_create_account(form, custom_form=None):
+def _do_create_account(form, custom_form=None, request=None):
     """
     Given cleaned post variables, create the User and UserProfile objects, as well as the
     registration for this user.
@@ -1534,6 +1534,13 @@ def _do_create_account(form, custom_form=None):
 
     if errors:
         raise ValidationError(errors)
+
+    # Check for reCaptcha
+    if settings.FEATURES.get('TMA_ENABLE_REGISTRATION_RECAPTCHA') and \
+    not verify_recaptcha(request):
+        raise ValidationError({
+            'access_token': [_('Please prove you are not a robot.')]
+        })
 
     user = User(
         username=form.cleaned_data["username"],
@@ -1625,13 +1632,6 @@ def create_account_with_params(request, params):
     # params is request.POST, that results in a dict containing lists of values
     params = dict(params.items())
 
-    # Check for reCaptcha
-    if settings.FEATURES.get('TMA_ENABLE_REGISTRATION_RECAPTCHA') and \
-    not verify_recaptcha(request):
-        raise ValidationError({
-            'access_token': [_('Please prove you are not a robot.')]
-        })
-
     # allow to define custom set of required/optional/hidden fields via configuration
     extra_fields = configuration_helpers.get_value(
         'REGISTRATION_EXTRA_FIELDS',
@@ -1695,7 +1695,7 @@ def create_account_with_params(request, params):
     # Perform operations within a transaction that are critical to account creation
     with transaction.atomic():
         # first, create the account
-        (user, profile, registration) = _do_create_account(form, custom_form)
+        (user, profile, registration) = _do_create_account(form, custom_form, request)
 
         # next, link the account with social auth, if provided via the API.
         # (If the user is using the normal register page, the social auth pipeline does the linking, not this code)

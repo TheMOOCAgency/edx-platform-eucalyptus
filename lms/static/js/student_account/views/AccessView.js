@@ -109,6 +109,16 @@
                 loadForm: function(type) {
                     var loadFunc = _.bind(this.load[type], this);
                     loadFunc(this.formDescriptions[type]);
+                    if (type == "login" && this.login_captcha == true) {
+                        var login_widget = grecaptcha.render('login-recaptcha', {
+                          'sitekey' : this.captcha_site_key
+                        });
+                    }
+                    if (type == "register" && this.registration_captcha == true) {
+                        var registration_widget = grecaptcha.render('registration-recaptcha', {
+                          'sitekey' : this.captcha_site_key
+                        });
+                    }
                 },
 
                 load: {
