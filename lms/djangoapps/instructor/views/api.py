@@ -2510,6 +2510,7 @@ def send_email(request, course_id):
     targets = json.loads(request.POST.get("send_to"))
     subject = request.POST.get("subject")
     message = request.POST.get("message")
+    selected = request.POST.get("selected_emails", "")
 
     # allow two branding points to come from Site Configuration: which CourseEmailTemplate should be used
     # and what the 'from' field in the email should be
@@ -2526,7 +2527,7 @@ def send_email(request, course_id):
         email = CourseEmail.create(
             course_id,
             request.user,
-            targets,
+            targets, selected,
             subject, message,
             template_name=template_name,
             from_addr=from_addr
