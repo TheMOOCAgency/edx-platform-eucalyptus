@@ -208,3 +208,16 @@ urlpatterns += (
     url(r'^404$', handler404),
     url(r'^500$', handler500),
 )
+
+#================TMA =================
+# Platform wide news
+if settings.FEATURES.get('TMA_ENABLE_PLATFORM_WIDE_NEWS'):
+    urlpatterns += (
+        url(r'^news/$', 'site_news.views.news_outline', name="news_outline"),
+        url(r'^news_handler/$', 'site_news.views.news_handler', name="news_handler"),
+        url(r'^news_handler/(?P<page_id>[0-9]*)/$', 'site_news.views.news_handler', name="news_handler"),
+        url(r'^get_news_content/(?P<page_id>[0-9]*)/$', 'site_news.views.get_news_content', name="get_news_content"),
+        url(r'^reorder_news/$', 'site_news.views.reorder_news_handler', name="reorder_news_handler"),
+        url(r'^news_visibility/(?P<page_id>[0-9]*)/$', 'site_news.views.news_visibility_handler', name="news_visibility_handler"),
+    )
+#================TMA =================

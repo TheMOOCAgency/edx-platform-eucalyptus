@@ -2139,6 +2139,7 @@ INSTALLED_APPS = (
     'course_rating',
     'course_progress',
     'course_welcome',
+    'site_news',
 
 )
 

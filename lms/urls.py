@@ -1006,4 +1006,13 @@ if settings.FEATURES.get('TMA_ENABLE_FORUM_MESSAGES_API'):
             name='api_forum_messages'
         ),
     )
+
+# Platform wide news
+if settings.FEATURES.get('TMA_ENABLE_PLATFORM_WIDE_NEWS'):
+    urlpatterns += (
+        url(
+            r'^site-news/',
+            include('site_news.urls')
+        ),
+    )
 #================TMA =================

@@ -934,7 +934,7 @@ INSTALLED_APPS = (
     'django_sites_extensions',
 
     # additional release utilities to ease automation
-    'release_util'
+    'release_util',
 )
 
 
@@ -1043,6 +1043,9 @@ OPTIONAL_APPS = (
 
     # Organizations App (http://github.com/edx/edx-organizations)
     'organizations',
+
+    # Platform wide news
+    'site_news',
 )
 
 
