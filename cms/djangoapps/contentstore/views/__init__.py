@@ -20,6 +20,7 @@ from .user import *
 from .tabs import *
 from .videos import *
 from .transcripts_ajax import *
+from .custom_settings import *
 try:
     from .dev import *
 except ImportError:
