@@ -935,6 +935,9 @@ INSTALLED_APPS = (
 
     # additional release utilities to ease automation
     'release_util',
+
+    # TMA course generator
+    'course_generator',
 )
 
 
@@ -1212,3 +1215,10 @@ COMPREHENSIVE_THEME_LOCALE_PATHS = []
 # to generating test databases will discover and try to create all tables
 # and this setting needs to be present
 OAUTH2_PROVIDER_APPLICATION_MODEL = 'oauth2_provider.Application'
+
+########################## TMA Settings ##############################
+# Daily JSON dumps for creating courses: vodeclic
+COURSE_JSON_LOCATION = DATA_DIR / 'course_json'
+COURSE_JSON_FILE_NAME = 'vodeclic_get.json'
+VODECLIC_COURSE_IMAGE_LOCATION = "/edx/var/edxapp/staticfiles/vodeclic/pictures/"
+########################## TMA Settings ##############################
