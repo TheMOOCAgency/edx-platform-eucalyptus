@@ -190,6 +190,11 @@ class CourseMetadata(object):
             try:
                 val = model['value']
                 if hasattr(descriptor, key) and getattr(descriptor, key) != val:
+                    # TMA: Raise exception if user is not a course validator
+                    validation_required = settings.FEATURES.get('TMA_COURSE_CONTENT_VALIDATION')
+                    if validation_required and key == 'catalog_visibility' and not user.profile.is_validator:
+                        raise ValueError(_("Only course validators can alter course visibility"))
+
                     key_values[key] = descriptor.fields[key].from_json(val)
             except (TypeError, ValueError) as err:
                 did_validate = False
