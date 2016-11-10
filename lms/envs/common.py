@@ -1723,6 +1723,7 @@ REQUIRE_JS_PATH_OVERRIDES = {
     'js/courseware/toggle_element_visibility': 'js/courseware/toggle_element_visibility.js',
     'js/student_account/logistration_factory': 'js/student_account/logistration_factory.js',
     'js/student_profile/views/learner_profile_factory': 'js/student_profile/views/learner_profile_factory.js',
+    'js/student_profile/identity': 'js/student_profile/identity.js',
     'js/courseware/courseware_factory': 'js/courseware/courseware_factory.js',
     'js/groups/views/cohorts_dashboard_factory': 'js/groups/views/cohorts_dashboard_factory.js',
     'draggabilly': 'js/vendor/draggabilly.js'
@@ -3031,4 +3032,16 @@ TMA_WELCOME_PAGE_NAME = 'purple'
 
 # Enrollment workflow
 TMA_ENROLLMENT_REQUEST_EMAIL = "enrollment_request@tma.com"
+
+# IDENTITY PROOF CONFIG
+IDENTITY_PROOF_BACKEND = {
+    'class': 'storages.backends.overwrite.OverwriteStorage',
+    'options': {
+        'location': os.path.join(MEDIA_ROOT, 'identity-proofs/'),
+        'base_url': os.path.join(MEDIA_URL, 'identity-proofs'),
+    },
+}
+IDENTITY_PROOF_MAX_BYTES = 1024 * 1024 * 5
+IDENTITY_PROOF_MIN_BYTES = 100
+
 ############## //Settings for TMA ###################################
