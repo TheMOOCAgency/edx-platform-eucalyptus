@@ -1054,4 +1054,12 @@ urlpatterns += (
     ),
 )
 
+# CSV grade reports
+urlpatterns += (
+    url(
+        r'^generate_grade_reports/$',
+        'grades_util.views.grade_report_generation',
+        name="generate_grade_reports"
+    ),
+)
 #================TMA =================

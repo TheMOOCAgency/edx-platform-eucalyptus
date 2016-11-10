@@ -3044,4 +3044,8 @@ IDENTITY_PROOF_BACKEND = {
 IDENTITY_PROOF_MAX_BYTES = 1024 * 1024 * 5
 IDENTITY_PROOF_MIN_BYTES = 100
 
+# CSV grade reports
+TMA_MERGED_REPORTS_PATH = '/edx/app/edxapp/edx-platform/merged_folder/'
+TMA_MERGED_REPORTS_NAME = 'merged_report'
+
 ############## //Settings for TMA ###################################
