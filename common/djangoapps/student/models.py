@@ -1269,6 +1269,10 @@ class CourseEnrollment(models.Model):
                 log.warning(u"User %s failed to enroll in non-existent course %s", user.username, unicode(course_key))
                 raise NonExistentCourseError
 
+        # TMA workflow
+        if course.enrollment_workflow == "enp":
+            raise EnrollmentClosedError
+
         if check_access:
             if cls.is_enrollment_closed(user, course):
                 log.warning(

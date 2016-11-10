@@ -1016,4 +1016,12 @@ if settings.FEATURES.get('TMA_ENABLE_PLATFORM_WIDE_NEWS'):
             include('site_news.urls')
         ),
     )
+
+# TEnrollment workflow
+urlpatterns += (
+    url(
+        r'',
+        include('enrollment_workflow.urls')
+    ),
+)
 #================TMA =================

@@ -2140,6 +2140,7 @@ INSTALLED_APPS = (
     'course_progress',
     'course_welcome',
     'site_news',
+    'enrollment_workflow',
 
 )
 
@@ -3026,4 +3027,7 @@ RECAPTCHA_SECRETE_KEY = None
 
 # Course welcome page name
 TMA_WELCOME_PAGE_NAME = 'purple'
+
+# Enrollment workflow
+TMA_ENROLLMENT_REQUEST_EMAIL = "enrollment_request@tma.com"
 ############## //Settings for TMA ###################################

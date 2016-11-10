@@ -95,6 +95,8 @@ from lms.djangoapps.ccx.custom_exception import CCXLocatorValidationException
 from ..entrance_exams import user_must_complete_entrance_exam
 from ..module_render import get_module_for_descriptor, get_module, get_module_by_usage_id
 
+from enrollment_workflow.models import RequestEnroll
+
 
 log = logging.getLogger("edx.courseware")
 
@@ -622,6 +624,18 @@ def course_about(request, course_id):
         # Overview
         overview = CourseOverview.get_from_id(course.id)
 
+        # TMA workflow
+        enrollment_workflow = overview.enrollment_workflow
+        if enrollment_workflow == "enp":
+            can_enroll = False
+            enrollment_workflow = None
+        try:
+            enrollment_user = RequestEnroll.objects.get(student=request.user.id)
+            enrollment_status = enrollment_user.enrollment_status
+        except:
+            enrollment_status = None
+        # // TMA workflow
+
         context = {
             'course': course,
             'course_details': course_details,
@@ -650,6 +664,8 @@ def course_about(request, course_id):
             'cart_link': reverse('shoppingcart.views.show_cart'),
             'pre_requisite_courses': pre_requisite_courses,
             'course_image_urls': overview.image_urls,
+            'enrollment_workflow': enrollment_workflow,
+            'enrollment_status': enrollment_status
         }
         inject_coursetalk_keys_into_context(context, course_key)
 
