@@ -1024,4 +1024,12 @@ urlpatterns += (
         include('enrollment_workflow.urls')
     ),
 )
+
+# assignment_passing_status
+urlpatterns += (
+    url(
+        r'',
+        include('grades_util.urls')
+    ),
+)
 #================TMA =================
