@@ -19,7 +19,11 @@ from util.json_request import JsonResponse, JsonResponseBadRequest, expect_json
 from xmodule.modulestore.django import modulestore
 from xmodule.tabs import InvalidTabsException
 
-from contentstore.views.course import get_course_and_check_access
+from contentstore.views.course import (
+    get_course_and_check_access,
+    course_search_index_handler
+)
+
 
 log = logging.getLogger(__name__)
 
@@ -72,6 +76,7 @@ def custom_settings_handler(request, course_key_string):
                                 'visible_to_manager_only': request.POST.get('visible_to_manager_only', False)
                             }
                             CourseMetadata.update_from_dict(additional_info, course_module, request.user)
+                            course_search_index_handler(request, course_key_string)
                         except InvalidTabsException as err:
                             log.exception(err.message)
                             response_message = [

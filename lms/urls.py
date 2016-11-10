@@ -62,6 +62,7 @@ urlpatterns = (
 
     # Courseware search endpoints
     url(r'^search/', include('search.urls')),
+    url(r'^search/custom_discovery/$', 'custom_search.views.course_discovery_wrapper'),
 
     # Course content API
     url(r'^api/course_structure/', include('course_structure_api.urls', namespace='course_structure_api')),

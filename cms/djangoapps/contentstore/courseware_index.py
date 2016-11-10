@@ -618,6 +618,9 @@ class CourseAboutSearchIndexer(object):
                     exc_info=True,
                 )
 
+            if about_information.property_name == 'visible_to_manager_only':
+               section_content = ('no', 'yes')[int(section_content)]
+
             if section_content:
                 if about_information.index_flags & AboutInfo.ANALYSE:
                     analyse_content = section_content
