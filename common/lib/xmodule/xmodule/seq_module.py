@@ -1,3 +1,4 @@
+
 """
 xModule implementation of a learning sequence
 """
@@ -6,6 +7,7 @@ xModule implementation of a learning sequence
 import collections
 from datetime import datetime
 from django.utils.timezone import UTC
+from django.conf import settings
 import json
 import logging
 from pkg_resources import resource_string
@@ -298,7 +300,10 @@ class SequenceModule(SequenceFields, ProctoringFields, XModule):
             'prev_url': context.get('prev_url'),
             'banner_text': banner_text,
         }
-        fragment.add_content(self.system.render_template("seq_module.html", params))
+        if settings.FEATURES.get('TMA_ENABLE_CUSTOM_UNIT_LISTING'):
+            fragment.add_content(self.system.render_template("custom_seq_module.html", params))
+        else:
+            fragment.add_content(self.system.render_template("seq_module.html", params))
 
         self._capture_full_seq_item_metrics(display_items)
         self._capture_current_unit_metrics(display_items)

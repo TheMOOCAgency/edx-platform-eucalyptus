@@ -1032,4 +1032,13 @@ urlpatterns += (
         include('grades_util.urls')
     ),
 )
+
+# persist visit status of the unit
+urlpatterns += (
+    url(
+        r'^save_unit_visit/$',
+        'seq_nav.views.save_unit_visit',
+        name="save_unit_visit"
+    ),
+)
 #================TMA =================

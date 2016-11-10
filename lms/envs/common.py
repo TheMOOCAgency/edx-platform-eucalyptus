@@ -2141,6 +2141,7 @@ INSTALLED_APPS = (
     'course_welcome',
     'site_news',
     'enrollment_workflow',
+    'seq_nav',
 
 )
 
