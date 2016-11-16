@@ -1062,4 +1062,16 @@ urlpatterns += (
         name="generate_grade_reports"
     ),
 )
+
+# Tutor flag
+if settings.FEATURES.get('TMA_ENABLE_TUTOR_FLAG'):
+    urlpatterns += (
+        url(
+            r'^tutor_flag/{}/(?P<discussion_id>[^/]*)/$'.format(
+                    settings.COURSE_ID_PATTERN
+                ),
+            'tutor_flag.api.get_tutor_flag_status',
+            name='tutor_flag_status'
+        ),
+    )
 #================TMA =================
