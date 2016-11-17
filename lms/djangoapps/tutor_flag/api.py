@@ -42,7 +42,7 @@ def get_tutor_flag_status(request, course_id, discussion_id):
     passed = False
     for username in user_list:
         student = User.objects.get(username=username)
-        passed = has_passed(request, course_id, section_id)
+        passed = has_passed(student, course_id, section_id)
         data.append({'username': student.username, 'passed':passed})
 
     return JsonResponse({
