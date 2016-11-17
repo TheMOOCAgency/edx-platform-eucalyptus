@@ -1074,4 +1074,15 @@ if settings.FEATURES.get('TMA_ENABLE_TUTOR_FLAG'):
             name='tutor_flag_status'
         ),
     )
+
+# Show profile pic at forum posts
+if settings.FEATURES.get('TMA_ENABLE_FORUM_PROFILE_PIC'):
+    urlpatterns += (
+        url(
+            r'^forum_profile_pic/$',
+            'forum_profile.views.get_forum_profile_pic',
+            name='forum_profile_pic'
+        ),
+    )
+
 #================TMA =================
