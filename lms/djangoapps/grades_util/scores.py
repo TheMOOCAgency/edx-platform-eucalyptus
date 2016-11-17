@@ -10,13 +10,11 @@ from student.models import User
 from opaque_keys.edx.locations import SlashSeparatedCourseKey
 from courseware.courses import get_course_with_access
 
-def has_passed(request, course_id, section_url_name):
+def has_passed(student, course_id, section_url_name):
     """
     Returns True if the student has higher or equeal grades in
     asssignment type.
     """
-    student = request.user
-
     # Get the course by ID
     course_key = SlashSeparatedCourseKey.from_deprecated_string(course_id)
     course = get_course_with_access(student, 'load', course_key, depth=None)

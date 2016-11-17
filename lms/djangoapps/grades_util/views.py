@@ -34,7 +34,7 @@ def assignment_passing_status(request, course_id, section_id):
     type of the assignment.
     """
     try:
-        passed = has_passed(request, course_id, section_id)
+        passed = has_passed(request.user, course_id, section_id)
     except Exception as e:
         passed = False
 
