@@ -570,6 +570,7 @@ class CourseAboutSearchIndexer(object):
         AboutInfo("modes", AboutInfo.PROPERTY, AboutInfo.FROM_COURSE_MODE),
         AboutInfo("language", AboutInfo.PROPERTY, AboutInfo.FROM_COURSE_PROPERTY),
         AboutInfo("visible_to_manager_only", AboutInfo.PROPERTY, AboutInfo.FROM_COURSE_PROPERTY),
+        AboutInfo("subject", AboutInfo.PROPERTY, AboutInfo.FROM_ABOUT_INFO),
     ]
 
     @classmethod

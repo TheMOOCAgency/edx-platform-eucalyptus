@@ -29,6 +29,7 @@ ABOUT_ATTRIBUTES = [
     'entrance_exam_id',
     'enrollment_workflow',
     'entrance_exam_minimum_score_pct',
+    'subject',
 ]
 
 
@@ -64,6 +65,7 @@ class CourseDetails(object):
         self.video_thumbnail_image_name = ""
         self.video_thumbnail_image_asset_path = ""
         self.enrollment_workflow = ""
+        self.subject = ""
         self.pre_requisite_courses = []  # pre-requisite courses
         self.entrance_exam_enabled = ""  # is entrance exam enabled
         self.entrance_exam_id = ""  # the content location for the entrance exam
@@ -110,6 +112,7 @@ class CourseDetails(object):
         course_details.enrollment_start = course_descriptor.enrollment_start
         course_details.enrollment_end = course_descriptor.enrollment_end
         course_details.enrollment_workflow = course_descriptor.enrollment_workflow
+        course_details.subject = course_descriptor.subject
         course_details.pre_requisite_courses = course_descriptor.pre_requisite_courses
         course_details.course_image_name = course_descriptor.course_image
         course_details.course_image_asset_path = course_image_url(course_descriptor, 'course_image')

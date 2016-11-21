@@ -3048,4 +3048,24 @@ IDENTITY_PROOF_MIN_BYTES = 100
 TMA_MERGED_REPORTS_PATH = '/edx/app/edxapp/edx-platform/merged_folder/'
 TMA_MERGED_REPORTS_NAME = 'merged_report'
 
+# Setting for overriding default filtering facets for Course discovery
+COURSE_DISCOVERY_FILTERS = ["org", "language", "modes", "subject"]
+LANGUAGE_MAP = {'terms': {lang: display for lang, display in ALL_LANGUAGES}, 'name': 'Language'}
+COURSE_DISCOVERY_MEANINGS = {
+    'org': {
+        'name': 'Organization',
+    },
+    'modes': {
+        'name': 'Course Type',
+        'terms': {
+            'honor': 'Honor',
+            'verified': 'Verified',
+        },
+    },
+    'language': LANGUAGE_MAP,
+    'subject': {
+        'name': 'Subjects'
+    },
+}
+
 ############## //Settings for TMA ###################################

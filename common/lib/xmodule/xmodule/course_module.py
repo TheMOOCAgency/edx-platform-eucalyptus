@@ -264,6 +264,12 @@ class CourseFields(object):
         display_name=_("Course Display Name"),
         scope=Scope.settings
     )
+    subject = String(
+        help=_("Enter the subject name of the course. Further students can filter courses by subject."),
+        default="demo",
+        display_name=_("Subject"),
+        scope=Scope.settings
+    )
     course_edit_method = String(
         display_name=_("Course Editor"),
         help=_('Enter the method by which this course is edited ("XML" or "Studio").'),

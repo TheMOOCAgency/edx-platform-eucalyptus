@@ -117,6 +117,9 @@ define(['js/views/validation', 'codemirror', 'underscore', 'jquery', 'jquery.ui'
                    var enrollmentWorkflow = this.model.get('enrollment_workflow');
                    this.$el.find('#enrollment-workflow').val(enrollmentWorkflow);
 
+                  var subject = this.model.get('subject');
+                  this.$el.find('#subject').val(subject);
+
                    var videoThumbnailImageURL = this.model.get('video_thumbnail_image_asset_path');
                    this.$el.find('#video-thumbnail-image-url').val(videoThumbnailImageURL);
                    this.$el.find('#video-thumbnail-image').attr('src', videoThumbnailImageURL);
@@ -180,7 +183,8 @@ define(['js/views/validation', 'codemirror', 'underscore', 'jquery', 'jquery.ui'
                    'add_course_learning_info': 'add-course-learning-info',
                    'add_course_instructor_info': 'add-course-instructor-info',
                    'course_learning_info': 'course-learning-info',
-                   'enrollment_workflow': 'enrollment-workflow'
+                   'enrollment_workflow': 'enrollment-workflow',
+                   'subject': 'subject'
                },
 
                addLearningFields: function() {
@@ -303,6 +307,7 @@ define(['js/views/validation', 'codemirror', 'underscore', 'jquery', 'jquery.ui'
                        break;
                    case 'course-language':
                    case 'enrollment-workflow':
+                   case 'subject':
                    case 'course-effort':
                    case 'course-title':
                    case 'course-subtitle':

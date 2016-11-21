@@ -182,6 +182,9 @@ COURSE_DISCOVERY_MEANINGS = {
         },
     },
     'language': LANGUAGE_MAP,
+    'subject': {
+        'name': 'Subjects'
+    },
 }
 
 FEATURES['ENABLE_COURSE_DISCOVERY'] = True
