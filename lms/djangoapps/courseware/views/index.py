@@ -140,10 +140,11 @@ class CoursewareIndex(View):
         """
         self._redirect_if_needed_to_access_course()
         self._prefetch_and_bind_course()
-
+        """
         score = get_final_score(self.request, self.course_key);
         overall_progress = get_overall_progress(self.request.user.id, self.course_key)
         accordion_status = get_course_progress_tma(self.request.user.id, self.course_key)
+        """
         """
         self.append({'score':score});
         self.append({'overall_progress':overall_progress});
@@ -160,11 +161,7 @@ class CoursewareIndex(View):
                 self._save_positions()
                 self._prefetch_and_bind_section()
 
-        return render_to_response('courseware/courseware.html', self._create_courseware_context(),{
-            'score':score,
-            'overall_progress':overall_progress,
-            'accordion_status':accordion_status,
-        })
+        return render_to_response('courseware/courseware.html', self._create_courseware_context())
 
     def _redirect_if_not_requested_section(self):
         """
