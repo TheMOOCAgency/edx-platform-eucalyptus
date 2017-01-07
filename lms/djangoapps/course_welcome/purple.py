@@ -141,9 +141,10 @@ def get_course_progress_tma(student, course_key):
         course_progress = StudentCourseProgress.objects.get(student=student, course_id=course_key)
         progress = course_progress.progress
     except StudentCourseProgress.DoesNotExist:
-        pass
-    module_id = ['block-v1:TMA+TMA01+TMA01+type@vertical+block@86a332f27dfb4892a3735d4e38547807','block-v1:TMA+TMA01+TMA01+type@vertical+block@beabb09036d748faa9b3262e33457d24','block-v1:TMA+TMA01+TMA01+type@vertical+block@4ef176d6e4c84aedb948d1968d30ea44','block-v1:TMA+TMA01+TMA01+type@vertical+block@e886fc6af6e84c09918a0ef815228664','block-v1:TMA+TMA01+TMA01+type@vertical+block@2070fdac871041659f98bd5f4efcc42c','block-v1:TMA+TMA01+TMA01+type@vertical+block@3d75be3e90874776b73f545ef1b301d7','block-v1:TMA+TMA01+TMA01+type@vertical+block@6acf07fac3084955a4f486e418112081'];
+        pass    
+    #module_id = ['block-v1:TMA+TMA01+TMA01+type@vertical+block@86a332f27dfb4892a3735d4e38547807','block-v1:TMA+TMA01+TMA01+type@vertical+block@beabb09036d748faa9b3262e33457d24','block-v1:TMA+TMA01+TMA01+type@vertical+block@4ef176d6e4c84aedb948d1968d30ea44','block-v1:TMA+TMA01+TMA01+type@vertical+block@e886fc6af6e84c09918a0ef815228664','block-v1:TMA+TMA01+TMA01+type@vertical+block@2070fdac871041659f98bd5f4efcc42c','block-v1:TMA+TMA01+TMA01+type@vertical+block@3d75be3e90874776b73f545ef1b301d7','block-v1:TMA+TMA01+TMA01+type@vertical+block@6acf07fac3084955a4f486e418112081'];
     chapters = []
+    module_id = ['','','','','','','']
     i = 0;
     #count_list = module_id.count()
     for i in range(0, 7):
